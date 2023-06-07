@@ -134,14 +134,59 @@ function woocommerce_widgets_init() {
 }
 add_action( 'widgets_init', 'woocommerce_widgets_init' );
 
+add_action( 'init', 'true_jquery_register' );
+ 
+function true_jquery_register() {
+	if ( !is_admin() ) {
+		wp_deregister_script( 'jquery' );
+		wp_register_script( 'jquery', ( 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' ), false, null, true );
+		wp_enqueue_script( 'jquery' );
+	}
+
+}
 /**
  * Enqueue scripts and styles.
  */
 function woocommerce_scripts() {
 	wp_enqueue_style( 'woocommerce-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-animate', get_template_directory_uri(). '/assets/css/animate.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-aos', get_template_directory_uri(). '/assets/css/aos.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-bootstrap-datepicker', get_template_directory_uri(). '/assets/css/bootstrap-datepicker.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-bootstrap.min', get_template_directory_uri(). '/assets/css/bootstrap.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-flaticon', get_template_directory_uri(). '/assets/css/flaticon.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-icomoon', get_template_directory_uri(). '/assets/css/icomoon.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-ionicons.min', get_template_directory_uri(). '/assets/css/ionicons.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-jquery.timepicker', get_template_directory_uri(). '/assets/css/jquery.timepicker.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-magnific-popup', get_template_directory_uri(). '/assets/css/magnific-popup.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-open-iconic-bootstrap.min', get_template_directory_uri(). '/assets/css/open-iconic-bootstrap.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-owl.carousel.min', get_template_directory_uri(). '/assets/css/owl.carousel.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-owl.theme.default.min', get_template_directory_uri(). '/assets/css/owl.theme.default.min.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-_text-hide', get_template_directory_uri(). '/assets/css/css/mixins/_text-hide.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-bootstrap-reboot', get_template_directory_uri(). '/assets/css/bootstrap/bootstrap-reboot.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-bootstrap-grid', get_template_directory_uri(). '/assets/css/bootstrap/bootstrap-grid.css', array(), _S_VERSION );
+	wp_enqueue_style( 'woocommerce-bootstrap-reboot-style', get_template_directory_uri(). '/assets/css/css/bootstrap-reboot.css', array(), _S_VERSION );
+	wp_enqueue_style( 'general-style', get_template_directory_uri(). '/assets/css/general.css', array(), _S_VERSION );
+
+
 	wp_style_add_data( 'woocommerce-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'woocommerce-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-aos', get_template_directory_uri() . '/assets/js/aos.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-bootstrap-datepicker', get_template_directory_uri() . '/assets/js/bootstrap-datepicker.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-bootstrap.min', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-google-map', get_template_directory_uri() . '/assets/js/google-map.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery-3.2.1.min', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery-migrate-3.0.1.min', get_template_directory_uri() . '/assets/js/jquery-migrate-3.0.1.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery.animateNumber.min', get_template_directory_uri() . '/assets/js/jquery.animateNumber.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery.easing.1.3', get_template_directory_uri() . '/assets/js/jquery.easing.1.3.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery.magnific-popup.min', get_template_directory_uri() . '/assets/js/jquery.magnific-popup.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery.min', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-jquery.stellar.min', get_template_directory_uri() . '/assets/js/jquery.stellar.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-main', get_template_directory_uri() . '/assets/js/main.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-owl.carousel.min', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-popper.min', get_template_directory_uri() . '/assets/js/popper.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-range', get_template_directory_uri() . '/assets/js/range.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'woocommerce-scrollax.min', get_template_directory_uri() . '/assets/js/scrollax.min.js', array(), _S_VERSION, true );
+
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
